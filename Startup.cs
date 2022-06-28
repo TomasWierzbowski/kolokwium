@@ -1,6 +1,9 @@
+using kolokwium.Models;
+using kolokwium.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,8 @@ namespace kolokwium
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<MainDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddScoped<IDbService, DbService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
