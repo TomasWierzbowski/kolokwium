@@ -9,7 +9,7 @@ namespace kolokwium.Services
 {
     public class DbService : IDbService
     {
-        private const bool V = true;
+
         private readonly MainDbContext _dbContext;
         public DbService(MainDbContext dbContext)
         {
@@ -28,6 +28,7 @@ namespace kolokwium.Services
             .ThenInclude(e =>e.Members)
         .Select(e => new SomeSortOfTeam
         {
+            TeamID = e.TeamID,
             TeamName = e.TeamName,
             TeamDescription = e.TeamDescription,
             Members = e.Memberships.Select(e => new Member
